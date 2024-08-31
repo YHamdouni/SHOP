@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - E-Commerce Shop</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .hero {
+            background-color: #0056b3;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .hero h2 {
+            font-size: 32px;
+            margin: 0 0 10px;
+        }
+        .hero p {
+            font-size: 18px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .product {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
+            padding: 15px;
+            box-sizing: border-box;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+        .product-title {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .product-price {
+            font-size: 18px;
+            color: #007bff;
+            margin: 5px 0;
+        }
+        .product-description {
+            font-size: 14px;
+            color: #555;
+            margin: 10px 0;
+            height: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-actions a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .product-actions a:hover {
+            text-decoration: underline;
+        }
+        .no-products {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+        }
+        .add-product {
+            display: block;
+            margin: 20px auto;
+            max-width: 200px;
+            padding: 10px;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .add-product:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the E-Commerce Shop</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/products">Products</a>
+            <a href="/sell">Sell</a>
+            <a href="/cart">Cart</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h2>Discover Amazing Products</h2>
+        <p>Find the best deals and unique items right here.</p>
+    </div>
+
+    <div class="container">
+        <!-- Link to add a new product -->
+        <a href="/products/new" class="add-product">Add New Product</a>
+
+        <!-- Display products if available -->
+        <!-- {{if .Products}} -->
+        <div class="product-list">
+            <!-- {{range .Products}} -->
+            <div class="product">
+                <img src="/static/images/{{.Image}}" alt="{{.Title}}">
+                <div class="product-title">{{.Title}}</div>
+                <div class="product-price">${{.Price}}</div>
+                <div class="product-description">{{.Description}}</div>
+                <div class="product-actions">
+                    <a href="/products/{{.ID}}">View Details</a>
+                    {{if .CanEdit}}
+                    <a href="/products/{{.ID}}/edit">Edit</a>
+                    <a href="/products/{{.ID}}/delete">Delete</a>
+                    <!-- {{end}} -->
+                </div>
+            </div>
+            <!-- {{end}} -->
+        </div>
+        <!-- {{else}} -->
+        <div class="no-products">No products available at the moment.</div>
+        <!-- {{end}} -->
+    </div>
+</body>
+</html>

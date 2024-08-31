@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-align: center;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .product {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .product-title {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .product-price {
+            font-size: 18px;
+            color: #007bff;
+        }
+        .product-description {
+            font-size: 14px;
+            color: #555;
+            margin: 10px 0;
+        }
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        .product-actions a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .product-actions a:hover {
+            text-decoration: underline;
+        }
+        .no-products {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+        }
+        .add-product {
+            display: block;
+            margin: 20px auto;
+            max-width: 200px;
+            padding: 10px;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .add-product:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Products</h1>
+        <!-- Link to add a new product -->
+        <a href="/products/new" class="add-product">Add New Product</a>
+
+        <!-- Display products if available -->
+        {{if .Products}}
+        <div class="product-list">
+            {{range .Products}}
+            <div class="product">
+                <img src="/static/images/{{.Image}}" alt="{{.Title}}">
+                <div class="product-title">{{.Title}}</div>
+                <div class="product-price">${{.Price}}</div>
+                <div class="product-description">{{.Description}}</div>
+                <div class="product-actions">
+                    <a href="/products/{{.ID}}">View</a>
+                    {{if .CanEdit}}
+                    <a href="/products/{{.ID}}/edit">Edit</a>
+                    <a href="/products/{{.ID}}/delete">Delete</a>
+                    {{end}}
+                </div>
+            </div>
+            {{end}}
+        </div>
+        {{else}}
+        <div class="no-products">No products available</div>
+        {{end}}
+    </div>
+</body>
+</html>
